@@ -9,7 +9,7 @@ Amplify.configure(awsExports);
 function App({ signOut, user }) {
   return (
     <>
-      <h1>Hello {user.username}, welcome to Chloe's web app.</h1>
+      <h1>Hello {user.username}, welcome to Chloe's web app!</h1>
       <button onClick={signOut}>Sign out</button>
     </>
   );
