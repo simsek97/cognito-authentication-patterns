@@ -24,7 +24,7 @@ const App = () => {
                   hasError={!!validationErrors.acknowledgement}
                   name="acknowledgement"
                   value="yes"
-                  label="I agree with the Terms & Conditions."
+                  label="I agree with the Terms & Conditions!"
                 />
               </>
             );
