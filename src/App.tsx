@@ -1,8 +1,15 @@
+/* export by name */
 import { Amplify } from "aws-amplify";
 import { Authenticator, useAuthenticator, CheckboxField } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import awsExports from './aws-exports';
+
+/* configure cognito and allows connection to aws amplify within my aws account*/
+import awsExports from 'aws-exports'; /*export by default*/
+
+import Home from "Home";
+
 Amplify.configure(awsExports);
+
 
 const App = () => {
   return (
@@ -42,10 +49,7 @@ const App = () => {
       }}
     >
       {({ signOut, user }) => (
-        <main>
-          <h1>Hello {user.username}</h1>
-          <button onClick={signOut}>Sign out</button>
-        </main>
+          <Home myUser={user} userSignout={signOut} />
       )}
     </Authenticator>
   );
