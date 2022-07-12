@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Creating a React.js App with Amplify Hosted Authentication UI using TypeScript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository is a refactor of https://github.com/aws-samples/create-react-app-auth-amplify using Typescript with some additional improvements like Amplify UI.
 
-## Available Scripts
+This app implements the new version of Amplify Authenticator from the Amplify UI to provide a basic authentication flow for sign up, sign in, sign out, as well as protected client side routing using AWS Amplify.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+You will need an AWS Account ready to use. You will also need to install Node, npm and the Amplify CLI. For more information on installation, visit https://docs.amplify.aws/cli/start/install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Deploy with the AWS Amplify Console
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The AWS Amplify Console provides hosting for fullstack serverless web apps. Deploy this app to your AWS account with a single click:
 
-### `npm test`
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/aws-samples/create-react-app-amplify-auth-typescript)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The Amplify Console will fork this repo in your GitHub account, and then build and deploy your backend and frontend in a single workflow. Your app will be available at `https://main.appid.amplifyapp.com`.
 
-### `npm run build`
+## Preview
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="assets/create-account.png" width="600"/>
+<img src="assets/signin.png" width="600"/>
+<img src="assets/home.png" width="600"/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run locally with the Amplify CLI
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Fork the repo in your account and then clone it as below.
 
-### `npm run eject`
+```
+git clone https://github.com/<username>/create-react-app-amplify-auth-typescript.git
+cd create-react-app-amplify-auth-typescript
+yarn install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. Pull backend from AWS Amplify using appid and envname which can be found on AWS Amplify UI.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+amplify pull --appId appid --envName envname
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. Repopulate your App.tsx file with the following code:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+import { Amplify } from "aws-amplify";
+import { Authenticator, useAuthenticator, CheckboxField } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import awsExports from 'aws-exports';
+import Home from "Home";
+Amplify.configure(awsExports);
 
-## Learn More
+const App = () => {
+return (
+<Authenticator
+initialState="signUp"
+components={{
+SignUp: {
+FormFields() {
+const { validationErrors } = useAuthenticator();
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+            return (
+              <>
+                <Authenticator.SignUp.FormFields />
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+                <CheckboxField
+                  errorMessage={validationErrors.acknowledgement as string}
+                  hasError={!!validationErrors.acknowledgement}
+                  name="acknowledgement"
+                  value="yes"
+                  label="I agree with the Terms & Conditions."
+                />
+              </>
+            );
+          },
+        },
+      }}
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+      services={{
+        async validateCustomSignUp(formData) {
+          if (!formData.acknowledgement) {
+            return {
+              acknowledgement: 'You must agree to the Terms & Conditions',
+            };
+          }
+        },
+      }}
+    >
 
-### Analyzing the Bundle Size
+      {({ signOut, user }) => (
+          <Home myUser={user} userSignout={signOut} />
+      )}
+    </Authenticator>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+);
+}
 
-### Making a Progressive Web App
+export default App;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+    Code can also be found src => App.tsx
 
-### Advanced Configuration
+5. Rerun application.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+ctrl +C
+npm run start
+```
