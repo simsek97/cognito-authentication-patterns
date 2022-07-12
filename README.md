@@ -40,6 +40,7 @@ amplify pull --appId appid --envName envname
 
 3. Repopulate your App.tsx file with the following code:
 
+```
 import { Amplify } from "aws-amplify";
 import { Authenticator, useAuthenticator, CheckboxField } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
@@ -94,6 +95,7 @@ const { validationErrors } = useAuthenticator();
 }
 
 export default App;
+```
 
     Code can also be found src => App.tsx
 
