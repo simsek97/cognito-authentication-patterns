@@ -13,7 +13,6 @@ Amplify.configure(awsExports); // setting up the various AWS resources that we w
 
 // defining function using const instead of function()
 // makes function immutable & allows for fat arrow syntax
-
 const App = () => {
   return (
     <Authenticator // calling authenticator from amplify
@@ -25,23 +24,26 @@ const App = () => {
 
             return (
               <>
-                {/*use default `Authenticator.SignUp.FormFields` */}
+                {/* use the default `Authenticator.SignUp.FormFields` */}
                 <Authenticator.SignUp.FormFields />
 
-                {/* Append & require Terms & Conditions field to sign up  */}
+                {/* adds terms and conditions and requires them in order to sign up */}
                 <CheckboxField
                   errorMessage={validationErrors.acknowledgement as string}
                   hasError={!!validationErrors.acknowledgement}
                   name="acknowledgement"
                   value="yes"
-                  label="I agree with the Terms & Conditions!"
+                  label="I agree with the Terms & Conditions."
                 />
               </>
             );
           },
         },
       }}
-      services={{
+
+      
+      // requires user to accept terms and conditions to create account
+      services={{ 
         async validateCustomSignUp(formData) {
           if (!formData.acknowledgement) {
             return {
@@ -51,6 +53,8 @@ const App = () => {
         },
       }}
     >
+
+    {/*creates home page*/}
       {({ signOut, user }) => (
           <Home myUser={user} userSignout={signOut} />
       )}

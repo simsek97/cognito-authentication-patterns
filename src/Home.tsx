@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import { CognitoUserAmplify } from '@aws-amplify/ui';
 type HomeProps = {
     myUser: CognitoUserAmplify,
