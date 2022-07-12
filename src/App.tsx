@@ -6,15 +6,18 @@ import '@aws-amplify/ui-react/styles.css';
 /* configure cognito and allows connection to aws amplify within my aws account*/
 import awsExports from 'aws-exports'; /*export by default*/
 
-import Home from "Home";
+import Home from "Home"; //*importing our homepage attributes from Home.tsx
 
-Amplify.configure(awsExports);
+Amplify.configure(awsExports); // setting up the various AWS resources that we want to work with
 
+
+// defining function using const instead of function()
+// makes function immutable & allows for fat arrow syntax
 
 const App = () => {
   return (
-    <Authenticator
-      initialState="signUp"
+    <Authenticator // calling authenticator from amplify
+      initialState="signUp" // setting intial state of webpage
       components={{
         SignUp: {
           FormFields() {
@@ -22,7 +25,7 @@ const App = () => {
 
             return (
               <>
-                {/* Re-use default `Authenticator.SignUp.FormFields` */}
+                {/*use default `Authenticator.SignUp.FormFields` */}
                 <Authenticator.SignUp.FormFields />
 
                 {/* Append & require Terms & Conditions field to sign up  */}
