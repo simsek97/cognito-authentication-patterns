@@ -4,7 +4,7 @@ This app uses the new version of Amplify Authenticator to provide a basic user a
 
 ## Prerequisites
 
-You will need an AWS Account ready to use. You will also need to install Node, npm and the Amplify CLI. For more information on installation, visit https://docs.amplify.aws/cli/start/install
+You will need to create an AWS Account. You will also need to install Node, npm and the Amplify CLI. For more information on installation, visit https://docs.amplify.aws/cli/start/install
 
 ## Deploy with the AWS Amplify Console
 
@@ -36,70 +36,8 @@ npm install
 amplify pull --appId appid --envName envname
 ```
 
-3. Repopulate your App.tsx file with the following code:
+3. Run application.
 
 ```
-import { Amplify } from "aws-amplify";
-import { Authenticator, useAuthenticator, CheckboxField } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-import awsExports from 'aws-exports';
-import Home from "Home";
-Amplify.configure(awsExports);
-
-const App = () => {
-return (
-<Authenticator
-initialState="signUp"
-components={{
-SignUp: {
-FormFields() {
-const { validationErrors } = useAuthenticator();
-
-            return (
-              <>
-                <Authenticator.SignUp.FormFields />
-
-                <CheckboxField
-                  errorMessage={validationErrors.acknowledgement as string}
-                  hasError={!!validationErrors.acknowledgement}
-                  name="acknowledgement"
-                  value="yes"
-                  label="I agree with the Terms & Conditions."
-                />
-              </>
-            );
-          },
-        },
-      }}
-
-
-      services={{
-        async validateCustomSignUp(formData) {
-          if (!formData.acknowledgement) {
-            return {
-              acknowledgement: 'You must agree to the Terms & Conditions',
-            };
-          }
-        },
-      }}
-    >
-
-      {({ signOut, user }) => (
-          <Home myUser={user} userSignout={signOut} />
-      )}
-    </Authenticator>
-
-);
-}
-
-export default App;
-```
-
-    Code can also be found src => App.tsx
-
-5. Rerun application.
-
-```
-ctrl +C
 npm run start
 ```
