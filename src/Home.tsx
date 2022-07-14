@@ -8,6 +8,7 @@ const Home = (props: HomeProps) => {
     const { myUser, userSignout } = props;
 
     return (
+        
         <main>
           <h1>Hello {myUser?.username || "User"}</h1>
           <button onClick={userSignout}>Sign out</button>
