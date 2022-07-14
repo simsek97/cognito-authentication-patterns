@@ -27,7 +27,7 @@ const App = () => {
                 {/* use the default `Authenticator.SignUp.FormFields` */}
                 <Authenticator.SignUp.FormFields />
 
-                {/* adds terms and conditions and requires them in order to sign up */}
+                {/* adds terms and conditions and requires in order to sign up */}
                 <CheckboxField
                   errorMessage={validationErrors.acknowledgement as string}
                   hasError={!!validationErrors.acknowledgement}
@@ -54,7 +54,7 @@ const App = () => {
       }}
     >
 
-    {/*creates home page*/}
+    {/* creates home page */}
       {({ signOut, user }) => (
           <Home myUser={user} userSignout={signOut} />
       )}
