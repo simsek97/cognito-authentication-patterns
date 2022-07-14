@@ -17,7 +17,7 @@ The Amplify Console will fork this repo in your GitHub account, and then build a
 ## Preview
 
 <img src="assets/create-account.png" width="600"/>
-<img src="assets/signin.png" width="600"/>
+<img src="assets/sign-in.png" width="600"/>
 <img src="assets/home.png" width="600"/>
 
 ## Run locally with the Amplify CLI
