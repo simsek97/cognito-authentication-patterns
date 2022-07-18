@@ -1,4 +1,4 @@
-# Creating a React.js App with Amplify Hosted Authentication UI using TypeScript
+# Creating a React App with Amplify Hosted Authentication UI using TypeScript
 
 This app uses the new version of Amplify Authenticator to provide a basic user authentication flow.
 
