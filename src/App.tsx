@@ -16,7 +16,7 @@ Amplify.configure(awsExports); // setting up the various AWS resources that we w
 const App = () => {
   return (
     <Authenticator // calling authenticator from amplify
-      initialState="signUp" // setting intial state of webpage
+      initialState="signIn" // setting intial state of webpage
       components={{
         SignUp: {
           FormFields() {
