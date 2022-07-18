@@ -25,7 +25,7 @@ The Amplify Console will fork this repo in your GitHub account, and then build a
 1. Fork the repo in your account and then clone it as below.
 
 ```
-git clone https://gitlab.aws.dev/sunchloe/cognito_proj.git
+git clone https://github.com/sunchloe1/cognito_patterns
 cd create-react-app-amplify-ui-workflow
 npm install
 ```
