@@ -1,17 +1,17 @@
-/* export by name */
+/* import by name */
 import { Amplify } from "aws-amplify";
 import { Authenticator, useAuthenticator, CheckboxField } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-/* configure cognito and allows connection to aws amplify within my aws account*/
-import awsExports from 'aws-exports'; /*export by default*/
+/* aws-exports configures cognito and allows connection to aws amplify within my aws account*/
+import awsExports from 'aws-exports'; 
 
 import Home from "Home"; //*importing our homepage attributes from Home.tsx
 
 Amplify.configure(awsExports); // setting up the various AWS resources that we want to work with
 
 
-// defining function using const instead of function()
+// storing function using const instead of function()
 // makes function immutable & allows for fat arrow syntax
 const App = () => {
   return (
@@ -43,6 +43,7 @@ const App = () => {
 
       
       // requires user to accept terms and conditions to create account
+      // 
       services={{ 
         async validateCustomSignUp(formData) {
           if (!formData.acknowledgement) {
