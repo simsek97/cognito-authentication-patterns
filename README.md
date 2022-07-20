@@ -10,7 +10,7 @@ You will need to create an AWS Account. You will also need to install Node, npm 
 
 The AWS Amplify Console provides hosting for fullstack serverless web apps. Deploy this app to your AWS account with a single click:
 
-[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/sunchloe1/cognito_patterns)
+[![amplifybutton](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/chloeesun/cognito_patterns)
 
 The Amplify Console will fork this repo in your GitHub account, and then build and deploy your backend and frontend in a single workflow. Your app will be available at `https://main.appid.amplifyapp.com`.
 
@@ -25,7 +25,7 @@ The Amplify Console will fork this repo in your GitHub account, and then build a
 1. Fork the repo in your account and then clone it as below.
 
 ```
-git clone https://github.com/sunchloe1/cognito_patterns
+git clone https://github.com/chloeesun/cognito_patterns
 cd create-react-app-amplify-ui-workflow
 npm install
 ```
