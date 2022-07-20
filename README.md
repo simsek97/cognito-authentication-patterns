@@ -30,7 +30,7 @@ cd create-react-app-amplify-ui-workflow
 npm install
 ```
 
-2. Pull backend from AWS Amplify using appid and envname which can be found on AWS Amplify UI.
+2. Pull backend from AWS Amplify using appid and envname which can be found on the AWS Amplify UI.
 
 ```
 amplify pull --appId appid --envName envname
