@@ -1,7 +1,13 @@
 {
-  "name": "cognitoapp",
+  "name": "cognito-authentication-patterns",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@aws-amplify/ui-react": "^3.0.3",
     "@react-native-async-storage/async-storage": "^1.17.7",
@@ -21,12 +27,6 @@
     "source-map-loader": "^4.0.0",
     "ts-loader": "^9.3.1",
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
