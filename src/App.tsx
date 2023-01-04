@@ -1,52 +1,26 @@
-import { Amplify } from "aws-amplify";
-import {
-  Authenticator,
-  useAuthenticator,
-  CheckboxField,
-} from "@aws-amplify/ui-react";
+import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
+import { Amplify } from "aws-amplify";
+
 import awsExports from "aws-exports";
-import Home from "Home";
+import HostedUIHome from "hosted-ui/Home";
 
 Amplify.configure(awsExports);
 
-const App = () => {
-  return (
-    <Authenticator
-      initialState="signIn"
-      components={{
-        SignUp: {
-          FormFields() {
-            const { validationErrors } = useAuthenticator();
+const pattern = "hosted-ui";
 
-            return (
-              <>
-                <Authenticator.SignUp.FormFields />
-                <CheckboxField
-                  errorMessage={validationErrors.acknowledgement as string}
-                  hasError={!!validationErrors.acknowledgement}
-                  name="acknowledgement"
-                  value="yes"
-                  label="I agree with the Terms & Conditions."
-                />
-              </>
-            );
-          },
-        },
-      }}
-      services={{
-        async validateCustomSignUp(formData) {
-          if (!formData.acknowledgement) {
-            return {
-              acknowledgement: "You must agree to the Terms & Conditions",
-            };
-          }
-        },
-      }}
-    >
-      {({ signOut, user }) => <Home myUser={user} userSignout={signOut} />}
-    </Authenticator>
-  );
+const App = () => {
+  if (pattern === "hosted-ui") {
+    return (
+      <Authenticator initialState="signIn">
+        {({ signOut, user }) => <HostedUIHome user={user} signOut={signOut} />}
+      </Authenticator>
+    );
+  }
 };
 
-export default App;
+const MyApp = () => {
+  return <App />;
+};
+
+export default MyApp;
