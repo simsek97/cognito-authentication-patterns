@@ -4,18 +4,23 @@ import { Amplify } from "aws-amplify";
 
 import awsExports from "aws-exports";
 import HostedUIHome from "hosted-ui/Home";
+import CustomWorkflowHome from "custom-workflow/Home";
 
 Amplify.configure(awsExports);
 
-const pattern = "hosted-ui";
+type TPattern = "hosted-ui" | "custom-workflow";
+const pattern: TPattern = "custom-workflow";
 
 const App = () => {
+  // @ts-ignore
   if (pattern === "hosted-ui") {
     return (
       <Authenticator initialState="signIn">
-        {({ signOut, user }) => <HostedUIHome user={user} signOut={signOut} />}
+        {({ user, signOut }) => <HostedUIHome user={user} signOut={signOut} />}
       </Authenticator>
     );
+  } else if (pattern === "custom-workflow") {
+    return <CustomWorkflowHome />;
   }
 };
 
