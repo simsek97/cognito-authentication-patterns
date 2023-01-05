@@ -2,7 +2,7 @@ import { Auth } from "aws-amplify";
 import { useEffect, useState } from "react";
 
 import LoggedInUser from "./LoggedInUser";
-import SignIn from "./SignIn";
+import SignIn from "./auth/SignIn";
 
 const Home = () => {
   const [user, setUser] = useState();

@@ -7,19 +7,19 @@ import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const ConfirmResetPassword = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>();
+  const [code, setCode] = useState<string>();
   const [password, setPassword] = useState<string>();
 
-  const handlesignIn = async () => {
+  const handleConfirmSignUp = async () => {
     try {
-      const response = await Auth.signIn(email, password);
-      console.log(response);
+      await Auth.forgotPasswordSubmit(email, code, password);
 
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
-      console.log("An error occurred: ", error.code);
+      console.log("An error occurred: ", error);
     }
   };
 
@@ -27,7 +27,7 @@ const SignIn = () => {
     <Box sx={{ display: "flex", width: "100%", justifyContent: "center" }}>
       <form>
         <Card sx={{ padding: "16px", maxWidth: "400px" }}>
-          <CardHeader title="Sign-In" />
+          <CardHeader title="Confirm Reset Password" />
 
           <TextField
             sx={{ marginBottom: "16px" }}
@@ -41,6 +41,17 @@ const SignIn = () => {
 
           <TextField
             sx={{ marginBottom: "16px" }}
+            type="text"
+            fullWidth
+            name="code"
+            placeholder="Code"
+            label="Code"
+            variant="outlined"
+            onChange={(event) => setCode(event.target.value)}
+          />
+
+          <TextField
+            sx={{ marginBottom: "16px" }}
             type="password"
             fullWidth
             name="password"
@@ -50,8 +61,8 @@ const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
           />
 
-          <Button variant="contained" onClick={handlesignIn}>
-            Sign In
+          <Button variant="contained" onClick={handleConfirmSignUp}>
+            Confirm Reset Password
           </Button>
         </Card>
       </form>
@@ -59,4 +70,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default ConfirmResetPassword;

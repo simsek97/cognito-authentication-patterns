@@ -1,31 +1,16 @@
-import { Authenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
+import Box from "@mui/material/Box";
 import { Amplify } from "aws-amplify";
+import { useRoutes } from "react-router-dom";
 
 import awsExports from "aws-exports";
-import HostedUIHome from "hosted-ui/Home";
-import CustomWorkflowHome from "custom-workflow/Home";
+import routes from "routes";
 
 Amplify.configure(awsExports);
 
-type TPattern = "hosted-ui" | "custom-workflow";
-const pattern: TPattern = "custom-workflow";
-
 const App = () => {
-  // @ts-ignore
-  if (pattern === "hosted-ui") {
-    return (
-      <Authenticator initialState="signIn">
-        {({ user, signOut }) => <HostedUIHome user={user} signOut={signOut} />}
-      </Authenticator>
-    );
-  } else if (pattern === "custom-workflow") {
-    return <CustomWorkflowHome />;
-  }
+  const content = useRoutes(routes);
+
+  return <Box>{content}</Box>;
 };
 
-const MyApp = () => {
-  return <App />;
-};
-
-export default MyApp;
+export default App;

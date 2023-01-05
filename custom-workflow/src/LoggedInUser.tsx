@@ -9,18 +9,20 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import { Auth } from "aws-amplify";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type THomeProps = {
   user: AmplifyUser;
-  signOut?: () => void;
 };
 
-const Home = (props: THomeProps) => {
-  const { user, signOut } = props;
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+const LoggedInUser = (props: THomeProps) => {
+  const { user } = props;
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -42,6 +44,16 @@ const Home = (props: THomeProps) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleSignOut = async () => {
+    try {
+      await Auth.signOut();
+
+      navigate("/signin");
+    } catch (error) {
+      console.log("Error occurred: ", error);
+    }
+  };
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -60,7 +72,7 @@ const Home = (props: THomeProps) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>{user.attributes.email}</MenuItem>
-      <MenuItem onClick={signOut}>Sign Out</MenuItem>
+      <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
     </Menu>
   );
 
@@ -151,4 +163,4 @@ const Home = (props: THomeProps) => {
   );
 };
 
-export default Home;
+export default LoggedInUser;
