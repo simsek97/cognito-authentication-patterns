@@ -9,18 +9,17 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
+import { useState } from "react";
 
 type THomeProps = {
   user: AmplifyUser;
-  signOut?: () => void;
 };
 
-const Home = (props: THomeProps) => {
-  const { user, signOut } = props;
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+const LoggedInUser = (props: THomeProps) => {
+  const { user } = props;
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    React.useState<null | HTMLElement>(null);
+    useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -40,6 +39,10 @@ const Home = (props: THomeProps) => {
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const signOut = (event: React.MouseEvent<HTMLElement>) => {
+    // setMobileMoreAnchorEl(event.currentTarget);
   };
 
   const menuId = "primary-search-account-menu";
@@ -151,4 +154,4 @@ const Home = (props: THomeProps) => {
   );
 };
 
-export default Home;
+export default LoggedInUser;
